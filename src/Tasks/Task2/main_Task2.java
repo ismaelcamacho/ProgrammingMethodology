@@ -20,8 +20,8 @@ public class main_Task2 {
     	listOfPlayers(players);
     	
     	
-    	int impostor1 = objective1(players,min, max);
-    	System.out.println("The impostor is: "+impostor1);
+    	//int impostor1 = objective1(players,min, max);
+    	//System.out.println("The impostor is: "+impostor1);
     	
     	min=1; max=players.length;
     	quickSort (players, min, max);
@@ -38,31 +38,33 @@ public class main_Task2 {
     }
     
     public static int Partition (Players [] players, int min, int max) {
-    	int piv = players[min].getTaskPerformed();
+    	int piv = players[min-1].getTaskPerformed();
     	int i = min-1;
     	int j=max+1;
     	do {
     		do {
     			j=j-1;
-    		} while (players[j].getTaskPerformed()>piv);
+    		} while (players[j-1].getTaskPerformed()>piv);
     		do {
     			i=i+1;
-    		} while (players[i].getTaskPerformed()<piv);
+    		} while (players[i-1].getTaskPerformed()<piv);
     		if (i<j) {
     			
-    			int local1=players[i].getTaskPerformed();
-    			int local2=players[i].getExperienceLvl();
-    			int local3=players[i].getLvlAnger();
+    			int local1=players[i-1].getTaskPerformed();
+    			int local2=players[i-1].getExperienceLvl();
+    			int local3=players[i-1].getLvlAnger();
     			
- 
-    			players[i].setTaskPerformed(players[j].getTaskPerformed());
-    			players[i].setExperienceLevel(players[j].getExperienceLvl());
-    			players[i].setLvlAnger(players[j].getLvlAnger());
-    			players[j].setTaskPerformed(local1);
-    			players[j].setExperienceLevel(local2);
-    			players[j].setLvlAnger(local3);
+    			players[i-1].setTaskPerformed(players[j-1].getTaskPerformed());
+    			players[i-1].setExperienceLevel(players[j-1].getExperienceLvl());
+    			players[i-1].setLvlAnger(players[j-1].getLvlAnger());
+    			players[j-1].setTaskPerformed(local1);
+    			players[j-1].setExperienceLevel(local2);
+    			players[j-1].setLvlAnger(local3);
+    			
+    			listOfPlayers(players);
     		}
     	} while (i<j);
+
     	return j;
     }
     
@@ -70,6 +72,7 @@ public class main_Task2 {
     	for (int i=0; i<players.length;i++) {
     		System.out.println(i+" || "+players[i].toString());
     	}
+    	System.out.println();
     }
     
     public static Players [] createPlayers (int nPlayers) {
