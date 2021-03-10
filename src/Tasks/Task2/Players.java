@@ -27,4 +27,8 @@ public class Players {
 	public void setLvlAnger(int anger) {
 		this.anger=anger;
 	}
+	
+	public String toString () {
+		return "Level of experience: "+experience+" | Task Performed: "+taskPerformed+" | Level of Anger: "+anger;
+	}
 }

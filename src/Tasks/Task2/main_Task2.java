@@ -11,10 +11,27 @@ public class main_Task2 {
     	do {
     		System.out.println("Introduce the number of players. Remember that must be more than 3");
     		numberOfPlayers=sc.nextInt();
-    	} while (numberOfPlayers <=3);
+    	} while (numberOfPlayers <3);
     	
     	Players [] players = createPlayers (numberOfPlayers);
+    	int min = 0;
+    	int max = players.length;
+    	
+    	listOfPlayers(players);
+    	
+    	int impostor1 = objective1(players,min, max);
+    	
+    	System.out.println("The impostor is: "+impostor1);
+    	
+    	
     }
+    
+    public static void listOfPlayers (Players [] players) {
+    	for (int i=0; i<players.length;i++) {
+    		System.out.println(players[i].toString());
+    	}
+    }
+    
     
     public static Players [] createPlayers (int nPlayers) {
     	Players [] Players = new Players [nPlayers];
@@ -29,4 +46,42 @@ public class main_Task2 {
     	Players[(int)(Math.random()*(nPlayers-0+1)+0)].setLvlAnger(2);
     	return Players;
     }
+    
+    public static int objective1 (Players [] players, int min, int max) {
+    	int impostor = -1;
+    	int rightWeight, leftWeight;
+    	int middle = (min+max)/2;
+    	
+    	if ((max-min)%2==0) { // ODD VECTOR
+    		leftWeight = toSize(players,min,middle-1);
+    		rightWeight = toSize (players,middle+1,max);
+    		if (leftWeight<rightWeight) {
+    			impostor = objective1 (players,min,middle-1);
+    		} else if (rightWeight<leftWeight) {
+    			impostor = objective1(players,middle+1,max);
+    		} else {
+    			impostor = middle;
+    		}
+    		
+    	} else { // EVEN VECTOR
+    		leftWeight = toSize(players,min,middle);
+    		rightWeight = toSize (players,middle+1,max);
+    		if (leftWeight<rightWeight) {
+    			impostor = objective1 (players,min,middle);
+    		} else {
+    			impostor = objective1(players,middle+1,max);
+    		}	
+    	}
+    	
+    	return impostor;
+    }
+    
+    public static int toSize (Players [] players, int min, int max) {
+    	int size=0;
+    	for (int i=min; i<max; i++) {
+    		size += players[i].getLvlAnger();
+    	}
+    	return size;
+    }
+    
 }
