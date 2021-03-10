@@ -15,15 +15,55 @@ public class main_Task2 {
     	
     	Players [] players = createPlayers (numberOfPlayers);
     	int min = 0;
-    	int max = players.length;
+    	int max = players.length-1;
     	
     	listOfPlayers(players);
     	
-    	int impostor1 = objective1(players,min, max);
     	
+    	int impostor1 = objective1(players,min, max);
     	System.out.println("The impostor is: "+impostor1);
     	
+    	min=1; max=players.length;
+    	quickSort (players, min, max);
     	
+    	
+    }
+    
+    public static void quickSort (Players [] players, int min, int max) {
+    	if (min<max) {
+    		int pos = Partition (players, min, max);
+    		quickSort (players, min, pos);
+    		quickSort (players, pos+1, max);
+    	}
+    }
+    
+    public static int Partition (Players [] players, int min, int max) {
+    	int piv = players[min].getTaskPerformed();
+    	int i = min-1;
+    	int j=max+1;
+    	do {
+    		do {
+    			j=j-1;
+    		} while (players[j].getTaskPerformed()>piv);
+    		do {
+    			i=i+1;
+    		} while (players[i].getTaskPerformed()<piv);
+    		if (i<j) {
+    			
+    			int local1=players[i].getTaskPerformed();
+    			int local2=players[i].getExperienceLvl();
+    			int local3=players[i].getLvlAnger();
+    			
+ 
+    			players[i].setTaskPerformed(players[j].getTaskPerformed());
+    			players[i].setExperienceLevel(players[j].getExperienceLvl());
+    			players[i].setLvlAnger(players[j].getLvlAnger());
+    			players[j].setTaskPerformed(local1);
+    			players[j].setExperienceLevel(local2);
+    			players[j].setLvlAnger(local3);
+    		}
+    	} while (i<j);
+    	return j;
     }
     
     public static void listOfPlayers (Players [] players) {
@@ -31,7 +71,6 @@ public class main_Task2 {
     		System.out.println(i+" || "+players[i].toString());
     	}
     }
-    
     
     public static Players [] createPlayers (int nPlayers) {
     	Players [] Players = new Players [nPlayers];
@@ -42,8 +81,10 @@ public class main_Task2 {
     		int anger = 1; 
     		Players [i] = new Players (experience, taskPerformed, anger);
     	}
-    	
-    	Players[(int)(Math.random()*((nPlayers-1)-0+1)+0)].setLvlAnger(2);
+    	int impostor = (int)(Math.random()*((nPlayers-1)-0+1)+0);
+    	Players[impostor].setLvlAnger(2);
+    	Players[impostor].setTaskPerformed(0);
+    	Players[impostor].setExperienceLevel(0);
     	return Players;
     }
     
@@ -57,25 +98,26 @@ public class main_Task2 {
     	}
     	else {
     		
-    		if ((max-min)%2==0) { // EVEN VECTOR
-    			leftWeight = toSize(players,min,middle);
-    			rightWeight = toSize (players,middle,max);
-    			if (leftWeight<rightWeight) {
-    				impostor = objective1(players,middle,max);
-    			} else {
-    				impostor = objective1 (players,min,middle);		
-    			}
-    		
-    		} else { // ODD VECTOR		
+    		if ((max-min)%2==0) { // ODD VECTOR
     			leftWeight = toSize(players,min,middle-1);
     			rightWeight = toSize (players,middle+1,max);
     			if (leftWeight<rightWeight) {
-    				impostor = objective1(players,middle,max-1);
+    				impostor = objective1(players,middle+1,max);
     			} else if (rightWeight<leftWeight) {
-    				impostor = objective1 (players,min,middle);	
+    				impostor = objective1 (players,min,middle-1);	
     			} else {
     				impostor = middle;
     			}
+    		
+    		} else { // EVEN VECTOR		
+    			leftWeight = toSize(players,min,middle);
+    			rightWeight = toSize (players,middle+1,max);
+    			if (leftWeight<rightWeight) {
+    				impostor = objective1(players,middle+1,max);
+    			} else {
+    				impostor = objective1 (players,min,middle);		
+    			}
+    			
     		}
     	}
     	return impostor;

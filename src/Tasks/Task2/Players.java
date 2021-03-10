@@ -28,7 +28,17 @@ public class Players {
 		this.anger=anger;
 	}
 	
+	public void setExperienceLevel (int experience) {
+		this.experience = experience;
+	}
+	
+	public void setTaskPerformed (int taskPerformed) {
+		this.taskPerformed=taskPerformed;
+	}
+	
 	public String toString () {
 		return "Level of experience: "+experience+" | Task Performed: "+taskPerformed+" | Level of Anger: "+anger;
 	}
+	
+	
 }
