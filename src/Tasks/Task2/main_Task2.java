@@ -15,16 +15,16 @@ public class main_Task2 {
     	
     	Players [] players = createPlayers (numberOfPlayers);
     	int min = 0;
-    	int max = players.length-1;
+    	int max = players.length;
     	
     	listOfPlayers(players);
     	
     	
-    	//int impostor1 = objective1(players,min, max);
-    	//System.out.println("The impostor is: "+impostor1);
+    	int impostor1 = objective1(players,min, max);
+    	System.out.println("The impostor is: "+impostor1);
     	
-    	min=1; max=players.length;
-    	quickSort (players, min, max);
+    	//min=1; max=players.length;
+    	//quickSort (players, min, max);
     	
     	
     }
@@ -45,6 +45,7 @@ public class main_Task2 {
     		do {
     			j=j-1;
     		} while (players[j-1].getTaskPerformed()>piv);
+    		 
     		do {
     			i=i+1;
     		} while (players[i-1].getTaskPerformed()<piv);
@@ -128,13 +129,14 @@ public class main_Task2 {
     
     public static int toSize (Players [] players, int min, int max) {
     	int size=0;
+    	max-=1;
     	
     	/*if (max == players.length) {
     		for (int i=min; i<max; i++) {
         		size += players[i].getLvlAnger();
         	}
     	} else {*/
-    	for (int i=min; i<=max; i++) {
+    	for (int i=min; i<max; i++) {
     		size += players[i].getLvlAnger();
     	}
     	//}
