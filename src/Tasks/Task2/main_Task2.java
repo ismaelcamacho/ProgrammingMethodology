@@ -43,7 +43,7 @@ public class main_Task2 {
     		Players [i] = new Players (experience, taskPerformed, anger);
     	}
     	
-    	Players[(int)(Math.random()*(nPlayers-0+1)+0)].setLvlAnger(2);
+    	Players[(int)(Math.random()*((nPlayers-1)-0+1)+0)].setLvlAnger(2);
     	return Players;
     }
     
@@ -52,34 +52,46 @@ public class main_Task2 {
     	int rightWeight, leftWeight;
     	int middle = (min+max)/2;
     	
-    	if ((max-min)%2==0) { // ODD VECTOR
-    		leftWeight = toSize(players,min,middle-1);
-    		rightWeight = toSize (players,middle+1,max);
-    		if (leftWeight<rightWeight) {
-    			impostor = objective1 (players,min,middle-1);
-    		} else if (rightWeight<leftWeight) {
-    			impostor = objective1(players,middle+1,max);
-    		} else {
-    			impostor = middle;
-    		}
-    		
-    	} else { // EVEN VECTOR
-    		leftWeight = toSize(players,min,middle);
-    		rightWeight = toSize (players,middle+1,max);
-    		if (leftWeight<rightWeight) {
-    			impostor = objective1 (players,min,middle);
-    		} else {
-    			impostor = objective1(players,middle+1,max);
-    		}	
+    	if (min==max) {
+    		impostor = max;
     	}
-    	
+    	else {
+    		
+    		if ((max-min)%2==0) { // EVEN VECTOR
+    			leftWeight = toSize(players,min,middle);
+    			rightWeight = toSize (players,middle+1,max);
+    			if (leftWeight<rightWeight) {
+    				impostor = objective1 (players,min,middle);
+    			} else {
+    				impostor = objective1(players,middle+1,max);
+    			}
+    		
+    		} else { // ODD VECTOR		
+    			leftWeight = toSize(players,min,middle-1);
+    			rightWeight = toSize (players,middle+1,max);
+    			if (leftWeight<rightWeight) {
+    				impostor = objective1 (players,min,middle-1);
+    			} else if (rightWeight<leftWeight) {
+    				impostor = objective1(players,middle+1,max);
+    			} else {
+    				impostor = middle;
+    			}
+    		}
+    	}
     	return impostor;
     }
     
     public static int toSize (Players [] players, int min, int max) {
     	int size=0;
-    	for (int i=min; i<max; i++) {
+    	
+    	if (max == players.length) {
+    		for (int i=min; i<max; i++) {
+        		size += players[i].getLvlAnger();
+        	}
+    	} else {
+    	for (int i=min; i<=max; i++) {
     		size += players[i].getLvlAnger();
+    	}
     	}
     	return size;
     }
