@@ -28,7 +28,7 @@ public class main_Task2 {
     
     public static void listOfPlayers (Players [] players) {
     	for (int i=0; i<players.length;i++) {
-    		System.out.println(players[i].toString());
+    		System.out.println(i+" || "+players[i].toString());
     	}
     }
     
@@ -59,20 +59,20 @@ public class main_Task2 {
     		
     		if ((max-min)%2==0) { // EVEN VECTOR
     			leftWeight = toSize(players,min,middle);
-    			rightWeight = toSize (players,middle+1,max);
+    			rightWeight = toSize (players,middle,max);
     			if (leftWeight<rightWeight) {
-    				impostor = objective1 (players,min,middle);
+    				impostor = objective1(players,middle,max);
     			} else {
-    				impostor = objective1(players,middle+1,max);
+    				impostor = objective1 (players,min,middle);		
     			}
     		
     		} else { // ODD VECTOR		
     			leftWeight = toSize(players,min,middle-1);
     			rightWeight = toSize (players,middle+1,max);
     			if (leftWeight<rightWeight) {
-    				impostor = objective1 (players,min,middle-1);
+    				impostor = objective1(players,middle,max-1);
     			} else if (rightWeight<leftWeight) {
-    				impostor = objective1(players,middle+1,max);
+    				impostor = objective1 (players,min,middle);	
     			} else {
     				impostor = middle;
     			}
@@ -84,15 +84,15 @@ public class main_Task2 {
     public static int toSize (Players [] players, int min, int max) {
     	int size=0;
     	
-    	if (max == players.length) {
+    	/*if (max == players.length) {
     		for (int i=min; i<max; i++) {
         		size += players[i].getLvlAnger();
         	}
-    	} else {
+    	} else {*/
     	for (int i=min; i<=max; i++) {
     		size += players[i].getLvlAnger();
     	}
-    	}
+    	//}
     	return size;
     }
     
