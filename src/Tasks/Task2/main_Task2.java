@@ -15,7 +15,7 @@ public class main_Task2 {
     	
     	Players [] players = createPlayers (numberOfPlayers);
     	int min = 0;
-    	int max = players.length;
+    	int max = players.length-1;
     	
     	listOfPlayers(players);
     	
@@ -44,7 +44,7 @@ public class main_Task2 {
     	do {
     		do {
     			j=j-1;
-    		} while (players[j-1].getTaskPerformed()>piv);
+    		} while (players[j-1].getTaskPerformed()>piv && players[j].getExperienceLvl()!=players[j-1].getExperienceLvl());
     		 
     		do {
     			i=i+1;
@@ -94,17 +94,17 @@ public class main_Task2 {
     
     public static int objective1 (Players [] players, int min, int max) {
     	int impostor = -1;
-    	int rightWeight, leftWeight;
-    	int middle = (min+max)/2;
+    	//int rightWeight, leftWeight;
+    	int middle = (max+min)/2;
     	
     	if (min==max) {
     		impostor = max;
     	}
     	else {
     		
-    		if ((max-min)%2==0) { // ODD VECTOR
-    			leftWeight = toSize(players,min,middle-1);
-    			rightWeight = toSize (players,middle+1,max);
+    		if ((max-min)%2==0) { // EVEN VECTOR
+    			int leftWeight = toSize(players,min,middle-1);
+    			int rightWeight = toSize (players,middle+1,max);
     			if (leftWeight<rightWeight) {
     				impostor = objective1(players,middle+1,max);
     			} else if (rightWeight<leftWeight) {
@@ -112,10 +112,11 @@ public class main_Task2 {
     			} else {
     				impostor = middle;
     			}
+    			
     		
-    		} else { // EVEN VECTOR		
-    			leftWeight = toSize(players,min,middle);
-    			rightWeight = toSize (players,middle+1,max);
+    		} else { // ODD VECTOR			
+    			int leftWeight = toSize(players,min,middle);
+    			int rightWeight = toSize (players,middle+1,max);
     			if (leftWeight<rightWeight) {
     				impostor = objective1(players,middle+1,max);
     			} else {
@@ -129,14 +130,14 @@ public class main_Task2 {
     
     public static int toSize (Players [] players, int min, int max) {
     	int size=0;
-    	max-=1;
+    	
     	
     	/*if (max == players.length) {
     		for (int i=min; i<max; i++) {
         		size += players[i].getLvlAnger();
         	}
     	} else {*/
-    	for (int i=min; i<max; i++) {
+    	for (int i=min; i<=max; i++) {
     		size += players[i].getLvlAnger();
     	}
     	//}
