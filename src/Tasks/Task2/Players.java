@@ -2,14 +2,16 @@ package Tasks.Task2;
 
 public class Players {
 	
+	protected int playerID;
 	protected int experience;
 	protected int taskPerformed;
 	protected int anger;
 	
-	public Players (int LvlExperience, int nTaskPerformed, int LvlAnger) {
+	public Players (int nPlayerID, int LvlExperience, int nTaskPerformed, int LvlAnger) {
 		this.experience = LvlExperience;
 		this.taskPerformed= nTaskPerformed;
 		this.anger = LvlAnger;
+		this.playerID=nPlayerID;
 	}
 
 	public int getExperienceLvl () {
@@ -37,7 +39,15 @@ public class Players {
 	}
 	
 	public String toString () {
-		return "Level of experience: "+experience+" | Task Performed: "+taskPerformed+" | Level of Anger: "+anger;
+		return "ID: ["+playerID+"] | Level of experience: "+experience+" | Task Performed: "+taskPerformed+" | Level of Anger: "+anger;
+	}
+	
+	public int getPlayerID() {
+		return playerID;
+	}
+	
+	public void setPlayerID (int playerID) {
+		this.playerID=playerID;
 	}
 	
 	
