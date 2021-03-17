@@ -2,7 +2,7 @@ package Tasks.Task1;
 
 import java.lang.Math;
 
-public class Firts_Algorithm {
+public class First_Algorithm {
 
     public static void main(String[] args) {
         int [] numbers = {1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400};
