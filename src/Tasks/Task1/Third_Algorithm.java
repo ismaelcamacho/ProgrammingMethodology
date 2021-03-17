@@ -6,21 +6,24 @@ public class Third_Algorithm {
         long StartTime = System.currentTimeMillis();
         for (int i=0; i<numbers.length; i++){
             System.out.print("The square root of " + numbers[i] + " is= ");
-            System.out.println(SquareRoot(numbers[i]));
+            System.out.println(Recursive(0,numbers[i],numbers[i]));
         }
         System.out.print("Time in milliseconds to execute this algorithm = ");
         System.out.println(System.currentTimeMillis()-StartTime + "ms");
     }
-    public static double recursiveSquareRoot(double x, double y){
-        if (x==1){
-            return 1;
+   public static int Recursive(int low, int high, int x){
+        if (low <= high){
+            int mid = (low+high)/2;
+            if ((mid*mid<=x)&&((mid+1)*(mid+1)>x)){
+                return mid;
+            }
+            else if (mid*mid<x){
+                return Recursive(mid+1,high,x);
+            }
+            else {
+                return Recursive(low, mid-1,x);
+            }
         }
-        else{
-            double result = (y + (x/y)/2);
-            return recursiveSquareRoot(x-1, result);
-        }
-    }
-    public static double SquareRoot(double x){
-        return recursiveSquareRoot(x, x-1);
-    }
+        return low;
+   }
 }
