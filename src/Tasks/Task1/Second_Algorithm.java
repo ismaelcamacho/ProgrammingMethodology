@@ -12,6 +12,14 @@ public class Second_Algorithm{
         }
         System.out.print("Time in milliseconds to execute this algorithm = ");
         System.out.println(System.currentTimeMillis()-StartTime1 + "ms");
+
+        long StartTime2 = System.currentTimeMillis();
+        for(int i=0; i< numbers.length;i++){
+            System.out.print("The square root of " + numbers[i] + " is= ");
+            System.out.println(babylonian(numbers[i]));
+        }
+        System.out.print("Time in milliseconds to execute this algorithm = ");
+        System.out.println(System.currentTimeMillis()-StartTime2 + "ms");
     }
 
     public static double binary_search(int x) {
@@ -31,5 +39,17 @@ public class Second_Algorithm{
                 }
             }
             return left - 1;
+        }
+        public static double babylonian(int number){
+            double result = number/2;
+            for (int j=1; j<10; j++){
+                if(result*result==number){
+                    return result;
+                }
+                else{
+                    result = (result + (number/result)) / 2;
+                }
+            }
+            return result;
         }
     }
