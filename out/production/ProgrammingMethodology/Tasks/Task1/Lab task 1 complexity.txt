@@ -1,0 +1,18 @@
+In First_Algotirhm class we implement only a main method, inside this main method we initialize the vector numbers 
+with all the numbers we are going to calculate their square root.
+Then we use the java Math class with sqrt method to calculate the square roots of the numbers in the vector.
+To do that we use a for to make all the iterations.
+
+That's why using a for the complexity of this algorithm is O(n)
+
+In Second_Algorithm class we have two methods. The first is an algorithm that implements the Babylonial method and
+its complexity is 
+
+The second method implements a binary search algorithm with a O(log2 n) complexity.
+
+In Third_Algorith class we implement a recursive method to calculate the square roots of the vector.
+Taking to account that the base case has a complexity of O(n) and we implement two ifs, the complexity is
+T(n)=T(n/2)+O(n).
+
+
+
