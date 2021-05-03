@@ -22,7 +22,7 @@ public class main {
 			selected_big_Numbers[i] = nBig[n_selected];
 			nBig = update_nBig(nBig, n_selected);
 			
-			System.out.print(selected_big_Numbers[i]+" ");
+			//System.out.print(selected_big_Numbers[i]+" ");
 		}
 		
 		int [] selected_small_numbers = new int [6-amount_big_numbers];
@@ -32,9 +32,24 @@ public class main {
 			selected_small_numbers[i] = nSmall[n_selected];
 			nSmall = update_nSmall(nSmall, n_selected, selected_small_numbers);
 			
-			System.out.print(selected_small_numbers[i]+" ");
+			//System.out.print(selected_small_numbers[i]+" ");
 		}
 		
+		int [] selected_numbers = new int [6];
+		
+		for (int i=0; i<selected_big_Numbers.length; i++) {
+			selected_numbers[i] = selected_big_Numbers[i];
+		}
+		for (int j=selected_big_Numbers.length, k = 0; j<selected_numbers.length; j++) {
+			selected_numbers[j] = selected_small_numbers[k++];
+		}
+		
+		for (int i=0; i<selected_numbers.length; i++ ) {
+			System.out.print(selected_numbers[i]+" ");
+		}
+		
+		
+		int RandomNumber = (int) (Math.random() * (999 - 101)) + 101;
 		
 	}
 	
@@ -60,7 +75,6 @@ public class main {
 			
 			
 		}
-		
 		
 		
 		return new_nSmall;
