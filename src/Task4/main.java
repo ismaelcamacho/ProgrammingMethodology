@@ -51,6 +51,26 @@ public class main {
 		
 		int RandomNumber = (int) (Math.random() * (999 - 101)) + 101;
 		
+		numerosBack (0, selected_numbers, RandomNumber);
+		
+	}
+	
+	public static void numerosBack (int etapa, int [] numeros, int cantidad) {
+		if (etapa == numeros.length) {
+			
+		} else {
+			for (int i=0; i<numeros.length;i++) {
+				if (Vale(i, etapa, numeros, cantidad)) {
+					
+				}
+			}
+		}
+	}
+	
+	public static boolean Vale (int i, int etapa, int [] numeros, int cantidad) {
+		boolean resultado = false;
+		
+		return resultado;
 	}
 	
 	public static int [] update_nSmall (int [] nSmall, int randomNumber, int [] selected_small_numbers) {
