@@ -15,25 +15,9 @@ public class main {
 		int [] nSmall = {1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10};
 		
 		int amount_big_numbers = choose_big_Numbers ();
-		int [] selected_big_Numbers = new int [amount_big_numbers];
+		int [] selected_big_Numbers = selected_Numbers (amount_big_numbers, nBig);	
 		
-		for (int i =0; i< amount_big_numbers; i++) {
-			int n_selected = getRandom(nBig);
-			selected_big_Numbers[i] = nBig[n_selected];
-			nBig = update_nBig(nBig, n_selected);
-			
-			//System.out.print(selected_big_Numbers[i]+" ");
-		}
-		
-		int [] selected_small_numbers = new int [6-amount_big_numbers];
-		
-		for (int i =0; i< 6-amount_big_numbers; i++) {
-			int n_selected = getRandom(nSmall);
-			selected_small_numbers[i] = nSmall[n_selected];
-			nSmall = update_nSmall(nSmall, n_selected, selected_small_numbers);
-			
-			//System.out.print(selected_small_numbers[i]+" ");
-		}
+		int [] selected_small_numbers = selected_Numbers (6-amount_big_numbers, nSmall);
 		
 		int [] selected_numbers = new int [6];
 		
@@ -55,6 +39,18 @@ public class main {
 		
 	}
 	
+	public static int [] selected_Numbers (int amount, int [] numbers_array) {
+		int [] array = new int [amount];
+		
+		for (int i =0; i< amount; i++) {
+			int n_selected = getRandom(numbers_array);
+			array[i] = numbers_array[n_selected];
+			numbers_array = update_array(numbers_array, n_selected);	
+		}
+		
+		return array;
+	}
+	
 	public static void numerosBack (int etapa, int [] numeros, int cantidad) {
 		if (etapa == numeros.length) {
 			
@@ -73,33 +69,6 @@ public class main {
 		return resultado;
 	}
 	
-	public static int [] update_nSmall (int [] nSmall, int randomNumber, int [] selected_small_numbers) {
-		int [] new_nSmall = new int [nSmall.length-1];
-		
-		if (nSmall == null || randomNumber < 0 || randomNumber > nSmall.length) {
-			System.out.println("Nothing can be removed");
-			return nSmall;
-		}
-		
-		for (int i =0; i < selected_small_numbers.length; i++) {
-			if (nSmall [randomNumber] == selected_small_numbers[i] ) {
-				return nSmall;
-			}
-		}
-		
-		for (int i =0, k=0; i <nSmall.length; i++) {
-				if (i == randomNumber) {
-					continue;
-				}
-				new_nSmall[k++] = nSmall[i];
-			
-			
-		}
-		
-		
-		return new_nSmall;
-	}
-	
 	
 	
 	public static int getRandom (int [] array) {
@@ -108,23 +77,22 @@ public class main {
 		return randomNumber ;
 	}
 	
-	public static int [] update_nBig (int [] nBig, int randomNumber) {
-		int [] new_nBig = new int [nBig.length-1];
+	public static int [] update_array (int [] array, int randomNumber) {
+		int [] new_array = new int [array.length-1];
 		
-		
-		if (nBig == null || randomNumber < 0 || randomNumber > nBig.length) {
+		if (array == null || randomNumber < 0 || randomNumber > array.length) {
 			System.out.println("Nothing can be removed");
-			return nBig;
+			return array;
 		}
 		
-		for (int i =0, k=0; i <nBig.length; i++) {
+		for (int i =0, k=0; i <array.length; i++) {
 			if (i == randomNumber) {
 				continue;
 			}
-			new_nBig[k++] = nBig[i];
+			new_array[k++] = array[i];
 		}
 		
-		return new_nBig;
+		return new_array;
 	}
 	
 	public static int choose_big_Numbers () throws IOException, InputMismatchException {
