@@ -1,4 +1,5 @@
 package Tasks.Task3;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.Math;
@@ -13,7 +14,7 @@ public class main {
             int number_containers;
             ArrayList<Eopie> Eopies = new ArrayList<>();
             ArrayList<Container> Containers = new ArrayList<>();
-            Travel[] travels = new Travel[Eopies.size()];
+            ArrayList<Travel> travels = new ArrayList<>();
             do {
                 number_eopies = scan_eopies();
                 number_containers = scan_containers();
@@ -148,22 +149,22 @@ public class main {
         eopies.get(j).setCarry_volume(local2);
     }
 
-    public static void greedy(ArrayList<Eopie> eopies, ArrayList<Container> containers, Travel[] travels) {
+    public static void greedy(ArrayList<Eopie> eopies, ArrayList<Container> containers, ArrayList<Travel>travels) {
         for (int i = 0; i < eopies.size(); i++) {
             for (int j = 0; j < containers.size(); j++) {
                 if (eopies.get(i).getCarry_volume() >= containers.get(j).getWater_volume()) {
-                    travels[i] = new Travel(eopies.get(i), containers.get(j));
+                    travels.add(i,eopies.get(i),containers.get(j));
                 }
             }
         }
     }
 
-    public static void print_travels(Travel[] travels) {
+    public static void print_travels(ArrayList<Travel>travels) {
         int total_liters=0;
         System.out.println("THIS IS THE LIST OF TOTAL TRAVELS");
-        for (int i = 0; i < travels.length; i++) {
-            total_liters+=travels[i].container.getWater_volume();
-            System.out.println(travels[i].toString());
+        for (int i = 0; i < travels.size(); i++) {
+            total_liters+=travels.get(i).container.getWater_volume();
+            System.out.println(travels.get(i).toString());
         }
         System.out.println("Total of litter carried by all the Eopies is=" + total_liters);
     }
