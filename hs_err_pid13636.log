@@ -16,7 +16,7 @@
 
 ---------------  S U M M A R Y ------------
 
-Command Line: -XX:+ShowCodeDetailsInExceptionMessages -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:64566 -javaagent:D:\Archivo de programas\java-2020-09\eclipse\configuration\org.eclipse.osgi\215\0\.cp\lib\javaagent-shaded.jar -Dfile.encoding=Cp1252 Task4.main
+Command Line: -XX:+ShowCodeDetailsInExceptionMessages -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:64566 -javaagent:D:\Archivo de programas\java-2020-09\eclipse\configuration\org.eclipse.osgi\215\0\.cp\lib\javaagent-shaded.jar -Dfile.encoding=Cp1252 Tasks.Task4.main
 
 Host: AMD Ryzen 5 2600 Six-Core Processor            , 12 cores, 15G,  Windows 10 , 64 bit Build 19041 (10.0.19041.928)
 Time: Mon May  3 19:06:48 2021 Hora de verano romance elapsed time: 1006 seconds (0d 0h 16m 46s)
@@ -30,7 +30,7 @@ Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
 V  [jvm.dll+0x10b946]
 
 Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
-j  Task4.main.main([Ljava/lang/String;)V+153
+j  Tasks.Task4.main.main([Ljava/lang/String;)V+153
 v  ~StubRoutines::call_stub
 
 siginfo: EXCEPTION_ACCESS_VIOLATION (0xc0000005), reading address 0xffffffffffffffff
@@ -528,10 +528,10 @@ Classes unloaded (0 events):
 No events
 
 Classes redefined (4 events):
-Event: 271.462 Thread 0x00000208b1adc000 redefined class name=Task4.main, count=1
-Event: 274.046 Thread 0x00000208b1adc000 redefined class name=Task4.main, count=2
-Event: 844.642 Thread 0x00000208b1adc000 redefined class name=Task4.main, count=3
-Event: 1006.840 Thread 0x00000208b1adc000 redefined class name=Task4.main, count=4
+Event: 271.462 Thread 0x00000208b1adc000 redefined class name=Tasks.Task4.main, count=1
+Event: 274.046 Thread 0x00000208b1adc000 redefined class name=Tasks.Task4.main, count=2
+Event: 844.642 Thread 0x00000208b1adc000 redefined class name=Tasks.Task4.main, count=3
+Event: 1006.840 Thread 0x00000208b1adc000 redefined class name=Tasks.Task4.main, count=4
 
 Internal exceptions (1 events):
 Event: 0.464 Thread 0x000002089234e000 Exception <a 'java/lang/NoSuchMethodError'{0x00000007107e8750}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeSpecialIFC(java.lang.Object, java.lang.Object, int)'> (0x00000007107e8750) 
@@ -621,7 +621,7 @@ symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Us
 
 VM Arguments:
 jvm_args: -XX:+ShowCodeDetailsInExceptionMessages -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:64566 -javaagent:D:\Archivo de programas\java-2020-09\eclipse\configuration\org.eclipse.osgi\215\0\.cp\lib\javaagent-shaded.jar -Dfile.encoding=Cp1252 
-java_command: Task4.main
+java_command: Tasks.Task4.main
 java_class_path (initial): D:\Documentos\GitHub\ProgrammingMethodology\bin
 Launcher Type: SUN_STANDARD
 

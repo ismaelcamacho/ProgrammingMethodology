@@ -1,4 +1,4 @@
-package Task4;
+package Tasks.Task4;
 
 public class Operation {
 
