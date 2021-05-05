@@ -16,17 +16,8 @@ public class main {
 		
 		int amount_big_numbers = choose_big_Numbers ();
 		int [] selected_big_Numbers = selected_Numbers (amount_big_numbers, nBig);	
-		
 		int [] selected_small_numbers = selected_Numbers (6-amount_big_numbers, nSmall);
-		
-		int [] selected_numbers = new int [6];
-		
-		for (int i=0; i<selected_big_Numbers.length; i++) {
-			selected_numbers[i] = selected_big_Numbers[i];
-		}
-		for (int j=selected_big_Numbers.length, k = 0; j<selected_numbers.length; j++) {
-			selected_numbers[j] = selected_small_numbers[k++];
-		}
+		int [] selected_numbers = finall_array(selected_big_Numbers, selected_small_numbers);
 		
 		for (int i=0; i<selected_numbers.length; i++ ) {
 			System.out.print(selected_numbers[i]+" ");
@@ -37,6 +28,19 @@ public class main {
 		
 		numerosBack (0, selected_numbers, RandomNumber);
 		
+	}
+	
+	public static int [] finall_array (int [] selected_big_Numbers, int [] selected_small_numbers) {
+		int [] final_array = new int [6];
+		
+		for (int i=0; i<selected_big_Numbers.length; i++) {
+			final_array[i] = selected_big_Numbers[i];
+		}
+		for (int j=selected_big_Numbers.length, k = 0; j<final_array.length; j++) {
+			final_array[j] = selected_small_numbers[k++];
+		}
+		
+		return final_array;
 	}
 	
 	public static int [] selected_Numbers (int amount, int [] numbers_array) {
