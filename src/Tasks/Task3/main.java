@@ -18,6 +18,14 @@ public class main {
             }while(number_containers<number_eopies);
             insert_Eopie(number_eopies, Eopies);
             insert_Container(number_containers, Containers);
+            int min_cont=0;
+            int max_cont=Containers.size()-1;
+            int min_eopie=0;
+            int max_eopie=Eopies.size()-1;
+            print_eopies(Eopies);
+            print_containers(Containers);
+            eopie_sort(Eopies,min_eopie,max_eopie);
+            container_sort(Containers,min_cont,max_cont);
             print_eopies(Eopies);
             print_containers(Containers);
 
@@ -60,5 +68,70 @@ public class main {
             System.out.println(containers.get(i).toString());
         }
     }
+    public static void container_sort(ArrayList<Container>containers, int min, int max){
+        if(min<max){
+            int position = container_partition(containers,min,max);
+            container_sort(containers,min,position);
+            container_sort(containers, position+1,max);
+        }
+    }
+    public static int container_partition(ArrayList<Container>containers, int min, int max){
+        double pivot=containers.get(min).getWater_volume();
+        int i=min-1;
+        int j=max+1;
+        do{
+            do{
+                j=j-1;
+            }while(containers.get(j).getWater_volume()>pivot);
+            do{
+                i=i+1;
+            }while(containers.get(i).getWater_volume()<pivot);
+            if(i<j){
+                container_replace(containers,i,j);
+            }
+        }while(i<j);
+        return j;
+    }
+    public static void container_replace(ArrayList<Container>containers, int i, int j){
+        int local1=containers.get(i).getContainer_id();
+        double local2=containers.get(i).getWater_volume();
+        containers.get(i).setContainer_id(containers.get(j).getContainer_id());
+        containers.get(i).setWater_volume(containers.get(j).getWater_volume());
+        containers.get(j).setContainer_id(local1);
+        containers.get(j).setWater_volume(local2);
+    }
+    public static void eopie_sort(ArrayList<Eopie>eopies, int min, int max){
+        if(min<max){
+            int position = eopie_partition(eopies,min,max);
+            eopie_sort(eopies,min,position);
+            eopie_sort(eopies, position+1,max);
+        }
+    }
+    public static int eopie_partition(ArrayList<Eopie>eopies, int min, int max){
+        double pivot=eopies.get(min).getCarry_volume();
+        int i=min-1;
+        int j=max+1;
+        do{
+            do{
+                j=j-1;
+            }while(eopies.get(j).getCarry_volume()>pivot);
+            do{
+                i=i+1;
+            }while(eopies.get(i).getCarry_volume()<pivot);
+            if(i<j){
+                eopie_replace(eopies,i,j);
+            }
+        }while(i<j);
+        return j;
+    }
+    public static void eopie_replace(ArrayList<Eopie>eopies, int i, int j){
+        int local1=eopies.get(i).getEopie_id();
+        double local2=eopies.get(i).getCarry_volume();
+        eopies.get(i).setEopie_id(eopies.get(j).getEopie_id());
+        eopies.get(i).setCarry_volume(eopies.get(j).getCarry_volume());
+        eopies.get(j).setEopie_id(local1);
+        eopies.get(j).setCarry_volume(local2);
+    }
+
 }
 
