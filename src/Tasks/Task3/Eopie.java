@@ -1,11 +1,19 @@
 package Tasks.Task3;
 
 public class Eopie {
-    protected int eopie_id;
-    protected double carry_volume;
+    public int eopie_id;
+    public double carry_volume;
 
-    public Eopie(double carry_volume, int eopie_id) {
+    public Eopie(int eopie_id, double carry_volume) {
+        this.eopie_id = eopie_id;
         this.carry_volume = carry_volume;
+    }
+
+    public int getEopie_id() {
+        return eopie_id;
+    }
+
+    public void setEopie_id(int eopie_id) {
         this.eopie_id = eopie_id;
     }
 
@@ -17,12 +25,11 @@ public class Eopie {
         this.carry_volume = carry_volume;
     }
 
-    public int getEopie_id() {
-        return eopie_id;
+    @Override
+    public String toString() {
+        return "Eopie{" +
+                "ID of the Eopie=" + eopie_id +
+                ", An Eopie can carry=" + carry_volume +
+                '}';
     }
-
-    public void setEopie_id(int eopie_id) {
-        this.eopie_id = eopie_id;
-    }
-    public void random_carry_volume()
 }
