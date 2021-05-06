@@ -69,7 +69,7 @@ public class main {
     			Eopies = new ArrayList<>();
                 Containers = new ArrayList<>();
                 
-                travels = new Travel [number_eopies*number_containers+1];
+                travels = new Travel [(number_eopies*number_containers*7)+1];
                
                 
     			
