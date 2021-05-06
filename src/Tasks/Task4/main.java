@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class main {
 	
@@ -19,10 +20,12 @@ public class main {
 		int [] selected_small_numbers = selected_Numbers (6-amount_big_numbers, nSmall);
 		int [] selected_numbers = finall_array(selected_big_Numbers, selected_small_numbers);
 		
+		ArrayList<Integer> numbers = new ArrayList<>();
+			
 		for (int i=0; i<selected_numbers.length; i++ ) {
 			System.out.print(selected_numbers[i]+" ");
+			numbers.add(selected_numbers[i]);
 		}
-		
 		
 		int RandomNumber = (int) (Math.random() * (999 - 101)) + 101;
 		
