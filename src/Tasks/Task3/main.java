@@ -7,9 +7,20 @@ import java.lang.Math;
 import java.util.InputMismatchException;
 import java.io.*;
 
+
+/**
+ * The type Main.
+ */
 public class main {
+
     private static Scanner sc = new Scanner(System.in);
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws IOException the io exception
+     */
     public static void main(String[] args) throws IOException {
         try {
         	int menu = 0;
@@ -35,7 +46,18 @@ public class main {
             System.out.println("Write numbers please");
         }
     }
-    
+
+    /**
+     * Main menu.
+     *
+     * @param menu              the menu
+     * @param number_eopies     the number eopies
+     * @param Eopies            the eopies
+     * @param number_containers the number containers
+     * @param Containers        the containers
+     * @param travels           the travels
+     * @throws IOException the io exception
+     */
     public static void main_menu (int menu, int number_eopies, ArrayList<Eopie> Eopies, int number_containers, ArrayList <Container> Containers, Travel [] travels) throws IOException{
     	
     	System.out.println("Choose 1 for 1 Day. Choose 2 for 7 days");
@@ -107,6 +129,11 @@ public class main {
 		}
     }
 
+    /**
+     * Scan eopies int.
+     *
+     * @return the int
+     */
     public static int scan_eopies() {
         System.out.println("Welcome to the Anti-Empire water delivery");
         System.out.println("How many Eopies do you want to use?");
@@ -114,12 +141,23 @@ public class main {
         return number_eopies;
     }
 
+    /**
+     * Scan containers int.
+     *
+     * @return the int
+     */
     public static int scan_containers() {
         System.out.println("How many Containers do you want to use?");
         int number_containers = sc.nextInt();
         return number_containers;
     }
 
+    /**
+     * Insert eopie.
+     *
+     * @param number_eopies the number eopies
+     * @param Eopies        the eopies
+     */
     public static void insert_Eopie(int number_eopies, ArrayList<Eopie> Eopies) {
         for (int i = 0; i < number_eopies; i++) {
             Eopie eopie = new Eopie(i, Math.random() * 50 + 1);
@@ -127,6 +165,12 @@ public class main {
         }
     }
 
+    /**
+     * Insert container.
+     *
+     * @param number_containers the number containers
+     * @param Containers        the containers
+     */
     public static void insert_Container(int number_containers, ArrayList<Container> Containers) {
         for (int i = 0; i < number_containers; i++) {
             Container container = new Container(i, Math.random() * 50 + 1);
@@ -134,6 +178,11 @@ public class main {
         }
     }
 
+    /**
+     * Print eopies.
+     *
+     * @param eopies the eopies
+     */
     public static void print_eopies(ArrayList<Eopie> eopies) {
         System.out.println("THIS IS THE LIST OF TOTAL EOPIES");
         for (int i = 0; i < eopies.size(); i++) {
@@ -141,6 +190,11 @@ public class main {
         }
     }
 
+    /**
+     * Print containers.
+     *
+     * @param containers the containers
+     */
     public static void print_containers(ArrayList<Container> containers) {
         System.out.println("THIS IS THE LIST OF TOTAL CONTAINERS");
         for (int i = 0; i < containers.size(); i++) {
@@ -148,6 +202,13 @@ public class main {
         }
     }
 
+    /**
+     * Container sort.
+     *
+     * @param containers the containers
+     * @param min        the min
+     * @param max        the max
+     */
     public static void container_sort(ArrayList<Container> containers, int min, int max) {
         if (min < max) {
             int position = container_partition(containers, min, max);
@@ -156,6 +217,14 @@ public class main {
         }
     }
 
+    /**
+     * Container partition int.
+     *
+     * @param containers the containers
+     * @param min        the min
+     * @param max        the max
+     * @return the int
+     */
     public static int container_partition(ArrayList<Container> containers, int min, int max) {
         double pivot = containers.get(min).getWater_volume();
         int i = min - 1;
@@ -174,6 +243,13 @@ public class main {
         return j;
     }
 
+    /**
+     * Container replace.
+     *
+     * @param containers the containers
+     * @param i          the
+     * @param j          the j
+     */
     public static void container_replace(ArrayList<Container> containers, int i, int j) {
         int local1 = containers.get(i).getContainer_id();
         double local2 = containers.get(i).getWater_volume();
@@ -183,6 +259,13 @@ public class main {
         containers.get(j).setWater_volume(local2);
     }
 
+    /**
+     * Eopie sort.
+     *
+     * @param eopies the eopies
+     * @param min    the min
+     * @param max    the max
+     */
     public static void eopie_sort(ArrayList<Eopie> eopies, int min, int max) {
         if (min < max) {
             int position = eopie_partition(eopies, min, max);
@@ -191,6 +274,14 @@ public class main {
         }
     }
 
+    /**
+     * Eopie partition int.
+     *
+     * @param eopies the eopies
+     * @param min    the min
+     * @param max    the max
+     * @return the int
+     */
     public static int eopie_partition(ArrayList<Eopie> eopies, int min, int max) {
         double pivot = eopies.get(min).getCarry_volume();
         int i = min - 1;
@@ -209,6 +300,13 @@ public class main {
         return j;
     }
 
+    /**
+     * Eopie replace.
+     *
+     * @param eopies the eopies
+     * @param i      the
+     * @param j      the j
+     */
     public static void eopie_replace(ArrayList<Eopie> eopies, int i, int j) {
         int local1 = eopies.get(i).getEopie_id();
         double local2 = eopies.get(i).getCarry_volume();
@@ -217,7 +315,17 @@ public class main {
         eopies.get(j).setEopie_id(local1);
         eopies.get(j).setCarry_volume(local2);
     }
-    
+
+    /**
+     * Greedy travels 7 days travel [ ].
+     *
+     * @param eopies     the eopies
+     * @param containers the containers
+     * @param size       the size
+     * @param counter    the counter
+     * @param travels    the travels
+     * @return the travel [ ]
+     */
     public static Travel [] greedyTravels_7days (ArrayList<Eopie> eopies, ArrayList<Container> containers, int size, int counter, Travel [] travels) {
     	
     	int pos = 0;
@@ -240,6 +348,14 @@ public class main {
     	return travels;
     }
 
+    /**
+     * Greedy travels travel [ ].
+     *
+     * @param eopies     the eopies
+     * @param containers the containers
+     * @param size       the size
+     * @return the travel [ ]
+     */
     public static Travel [] greedyTravels (ArrayList<Eopie> eopies, ArrayList<Container> containers, int size) {
     	Travel [] travels = new Travel [size];
     	int pos = 0;
@@ -260,6 +376,11 @@ public class main {
     	return travels;
     }
 
+    /**
+     * Print travels.
+     *
+     * @param travels the travels
+     */
     public static void print_travels(Travel [] travels) {
         int total_liters=0;
         System.out.println("THIS IS THE LIST OF TOTAL TRAVELS");
@@ -271,12 +392,18 @@ public class main {
         }
         System.out.println("Total of litter carried by all the Eopies is=" + total_liters);
     }
-    
+
+    /**
+     * N travels 7 days int.
+     *
+     * @param travels the travels
+     * @param counter the counter
+     * @return the int
+     */
     public static int n_travels_7_days (Travel [] travels, int counter) {
         
         for (int i = 0; i < travels.length; i++) {
         	if (travels[i]!=null) {
-                //System.out.println(travels[i].toString());
                 counter++;
         	}
         }
