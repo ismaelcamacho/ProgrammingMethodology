@@ -5,38 +5,106 @@ import java.util.Scanner;
 
 import java.lang.Math;
 import java.util.InputMismatchException;
+import java.io.*;
 
 public class main {
     private static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         try {
+        	int menu = 0;
+        	ArrayList<Eopie> Eopies = new ArrayList<>();
+            ArrayList<Container> Containers = new ArrayList<>();
+            Travel [] travels = null;
             int number_eopies;
             int number_containers;
-            ArrayList<Eopie> Eopies = new ArrayList<>();
-            ArrayList<Container> Containers = new ArrayList<>();
             
             do {
                 number_eopies = scan_eopies();
                 number_containers = scan_containers();
             } while (number_containers < number_eopies);
-            insert_Eopie(number_eopies, Eopies);
-            insert_Container(number_containers, Containers);
-            int min_cont = 0;
-            int max_cont = Containers.size() - 1;
-            int min_eopie = 0;
-            int max_eopie = Eopies.size() - 1;
-            print_eopies(Eopies);
-            print_containers(Containers);
-            eopie_sort(Eopies, min_eopie, max_eopie);
-            container_sort(Containers, min_cont, max_cont);
-            print_eopies(Eopies);
-            print_containers(Containers);
-            Travel [] travels = greedyTravels(Eopies, Containers);
-            print_travels(travels);
+        	
+        	do {
+        		
+        		main_menu(menu, number_eopies, Eopies, number_containers, Containers, travels);
+     		
+        	} while (menu!=3);
+    
+            
         } catch (InputMismatchException e) {
             System.out.println("Write numbers please");
         }
+    }
+    
+    public static void main_menu (int menu, int number_eopies, ArrayList<Eopie> Eopies, int number_containers, ArrayList <Container> Containers, Travel [] travels) throws IOException{
+    	
+    	System.out.println("Choose 1 for 1 Day. Choose 2 for 7 days");
+		try  {
+			do {
+				menu = sc.nextInt();
+				
+			} while (menu <1 || menu >3);
+			
+			switch (menu) {
+    		
+    		case 1:
+    			
+    			Eopies = new ArrayList<>();
+                Containers = new ArrayList<>();
+    			
+    			insert_Eopie(number_eopies, Eopies);
+                insert_Container(number_containers, Containers);
+                print_eopies(Eopies);
+                print_containers(Containers);
+                eopie_sort(Eopies, 0, Eopies.size() - 1);
+                container_sort(Containers, 0, Containers.size() - 1);
+                
+                travels = greedyTravels(Eopies, Containers, Eopies.size());
+                print_travels(travels);
+    			
+    			break;		
+    			
+    		case 2:
+    			
+    			Eopies = new ArrayList<>();
+                Containers = new ArrayList<>();
+                
+                travels = new Travel [number_eopies*number_containers+1];
+               
+                
+    			
+    			int n_travels = 0;
+    			
+    			for (int n = 0; n<7;n++) {
+    				Eopies.clear();
+                    Containers.clear();
+    				insert_Eopie(number_eopies, Eopies);
+                    insert_Container(number_containers, Containers);
+                    print_eopies(Eopies);
+                    print_containers(Containers);
+                    
+                    eopie_sort(Eopies, 0, Eopies.size() - 1);
+                    container_sort(Containers, 0, Containers.size() - 1);
+                    
+                    travels = greedyTravels_7days(Eopies, Containers, Eopies.size()*7, n_travels, travels);
+                    n_travels = n_travels_7_days(travels,n_travels);
+                    
+                    
+            
+    			}
+    			
+    			print_travels(travels);
+    			
+    			break;
+    		
+    		}
+			
+		} catch (InputMismatchException e) {
+			System.out.println("Error.Introduce a number");
+			sc.next();
+			main_menu(menu, number_eopies, Eopies, number_containers, Containers, travels);
+			
+		}
     }
 
     public static int scan_eopies() {
@@ -149,9 +217,31 @@ public class main {
         eopies.get(j).setEopie_id(local1);
         eopies.get(j).setCarry_volume(local2);
     }
+    
+    public static Travel [] greedyTravels_7days (ArrayList<Eopie> eopies, ArrayList<Container> containers, int size, int counter, Travel [] travels) {
+    	
+    	int pos = 0;
+         	
+    	for (int i = 0; i < eopies.size(); i++) {
+    		boolean delete = false;
+            for (int j = 0; j < containers.size(); j++) {
+                if (eopies.get(i).getCarry_volume() >= containers.get(j).getWater_volume()) {
+                    travels[counter] = new Travel (eopies.get(i), containers.get(j));
+                    pos = j;
+                    delete = true;
+                    
+                }
+            }
+            if (delete == true) {
+            	counter++;
+            	containers.remove(pos);
+            }
+        }
+    	return travels;
+    }
 
-    public static Travel [] greedyTravels (ArrayList<Eopie> eopies, ArrayList<Container> containers) {
-    	Travel [] travels = new Travel [eopies.size()];
+    public static Travel [] greedyTravels (ArrayList<Eopie> eopies, ArrayList<Container> containers, int size) {
+    	Travel [] travels = new Travel [size];
     	int pos = 0;
          	
     	for (int i = 0; i < eopies.size(); i++) {
@@ -180,6 +270,18 @@ public class main {
         	}
         }
         System.out.println("Total of litter carried by all the Eopies is=" + total_liters);
+    }
+    
+    public static int n_travels_7_days (Travel [] travels, int counter) {
+        
+        for (int i = 0; i < travels.length; i++) {
+        	if (travels[i]!=null) {
+                //System.out.println(travels[i].toString());
+                counter++;
+        	}
+        }
+         
+        return counter;
     }
 }
 
