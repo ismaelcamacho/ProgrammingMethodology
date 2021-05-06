@@ -2,6 +2,7 @@ package Tasks.Task3;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import java.lang.Math;
 import java.util.InputMismatchException;
 
@@ -14,7 +15,7 @@ public class main {
             int number_containers;
             ArrayList<Eopie> Eopies = new ArrayList<>();
             ArrayList<Container> Containers = new ArrayList<>();
-            ArrayList<Travel> travels = new ArrayList<>();
+            
             do {
                 number_eopies = scan_eopies();
                 number_containers = scan_containers();
@@ -31,7 +32,7 @@ public class main {
             container_sort(Containers, min_cont, max_cont);
             print_eopies(Eopies);
             print_containers(Containers);
-            greedy(Eopies, Containers,travels);
+            Travel [] travels = greedyTravels(Eopies, Containers);
             print_travels(travels);
         } catch (InputMismatchException e) {
             System.out.println("Write numbers please");
@@ -149,22 +150,34 @@ public class main {
         eopies.get(j).setCarry_volume(local2);
     }
 
-    public static void greedy(ArrayList<Eopie> eopies, ArrayList<Container> containers, ArrayList<Travel>travels) {
-        for (int i = 0; i < eopies.size(); i++) {
+    public static Travel [] greedyTravels (ArrayList<Eopie> eopies, ArrayList<Container> containers) {
+    	Travel [] travels = new Travel [eopies.size()];
+    	int pos = 0;
+         	
+    	for (int i = 0; i < eopies.size(); i++) {
+    		boolean delete = false;
             for (int j = 0; j < containers.size(); j++) {
                 if (eopies.get(i).getCarry_volume() >= containers.get(j).getWater_volume()) {
-                    travels.add(i,eopies.get(i),containers.get(j));
+                    travels[i] = new Travel (eopies.get(i), containers.get(j));
+                    pos = j;
+                    delete = true;
                 }
             }
+            if (delete == true) {
+            	containers.remove(pos);
+            }
         }
+    	return travels;
     }
 
-    public static void print_travels(ArrayList<Travel>travels) {
+    public static void print_travels(Travel [] travels) {
         int total_liters=0;
         System.out.println("THIS IS THE LIST OF TOTAL TRAVELS");
-        for (int i = 0; i < travels.size(); i++) {
-            total_liters+=travels.get(i).container.getWater_volume();
-            System.out.println(travels.get(i).toString());
+        for (int i = 0; i < travels.length; i++) {
+        	if (travels[i]!=null) {
+        		total_liters+=travels[i].container.getWater_volume();
+                System.out.println(travels[i].toString());
+        	}
         }
         System.out.println("Total of litter carried by all the Eopies is=" + total_liters);
     }
