@@ -13,7 +13,7 @@ import java.io.*;
  */
 public class main {
 
-    private static Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
 
     /**
      * The entry point of application.

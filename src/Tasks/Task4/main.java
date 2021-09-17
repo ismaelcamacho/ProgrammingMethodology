@@ -8,7 +8,7 @@ import java.util.Stack;
 
 public class main {
 	
-	private static Scanner sc = new Scanner (System.in);
+	private static final Scanner sc = new Scanner (System.in);
 	
 	/***************************************************************************************************************************
 	*
